@@ -1,7 +1,18 @@
 import { Category, Product, StoreConfig } from '../types';
 
-export const HERO_BANNER_IMAGE = '/src/assets/images/rosa_bags_hero_banner_1786701754670.jpg';
-export const BRAND_LOGO_IMAGE = '/src/assets/images/rosa_brand_logo_1786622288804.jpg';
+import heroBannerImg from '../assets/images/rosa_bags_hero_banner_1786701754670.jpg';
+import brandLogoImg from '../assets/images/rosa_brand_logo_1786622288804.jpg';
+import hermesBlueSetImg from '../assets/images/hermes_blue_set_1786680461964.jpg';
+import gucciMiniImg from '../assets/images/gucci_mini_bag_1786680473233.jpg';
+import emeraldBagImg from '../assets/images/women_crossbody_emerald_1786701731170.jpg';
+import eveningClutchImg from '../assets/images/evening_glitter_clutch_1786701714601.jpg';
+import hermesClassicImg from '../assets/images/hermes_classic_bag_1786678118984.jpg';
+import kidsBunnyPinkImg from '../assets/images/kids_backpack_pink_1786701703330.jpg';
+import kidsDinoBlueImg from '../assets/images/kids_dino_backpack_1786701742115.jpg';
+import nikeBackpackImg from '../assets/images/nike_black_backpack_1786680488848.jpg';
+
+export const HERO_BANNER_IMAGE = heroBannerImg;
+export const BRAND_LOGO_IMAGE = brandLogoImg;
 
 export const DEFAULT_STORE_CONFIG: StoreConfig = {
   whatsappNumber: '213561001185', // رقم الواتساب المباشر للطلب (+213561001185)
@@ -30,9 +41,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 5000,
     originalPrice: 6500,
     category: 'women-handbags',
-    image: '/src/assets/images/hermes_blue_set_1786680461964.jpg',
+    image: hermesBlueSetImg,
     gallery: [
-      '/src/assets/images/hermes_blue_set_1786680461964.jpg'
+      hermesBlueSetImg
     ],
     inStock: true,
     isNew: true,
@@ -47,9 +58,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 3500,
     originalPrice: 4600,
     category: 'women-crossbody',
-    image: '/src/assets/images/gucci_mini_bag_1786680473233.jpg',
+    image: gucciMiniImg,
     gallery: [
-      '/src/assets/images/gucci_mini_bag_1786680473233.jpg'
+      gucciMiniImg
     ],
     inStock: true,
     isNew: true,
@@ -64,9 +75,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 3800,
     originalPrice: 4800,
     category: 'women-crossbody',
-    image: '/src/assets/images/women_crossbody_emerald_1786701731170.jpg',
+    image: emeraldBagImg,
     gallery: [
-      '/src/assets/images/women_crossbody_emerald_1786701731170.jpg'
+      emeraldBagImg
     ],
     inStock: true,
     isNew: true,
@@ -81,9 +92,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 4200,
     originalPrice: 5500,
     category: 'evening-bags',
-    image: '/src/assets/images/evening_glitter_clutch_1786701714601.jpg',
+    image: eveningClutchImg,
     gallery: [
-      '/src/assets/images/evening_glitter_clutch_1786701714601.jpg'
+      eveningClutchImg
     ],
     inStock: true,
     isNew: true,
@@ -98,9 +109,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 3200,
     originalPrice: 4200,
     category: 'women-handbags',
-    image: '/src/assets/images/hermes_classic_bag_1786678118984.jpg',
+    image: hermesClassicImg,
     gallery: [
-      '/src/assets/images/hermes_classic_bag_1786678118984.jpg'
+      hermesClassicImg
     ],
     inStock: true,
     isNew: true,
@@ -115,9 +126,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2400,
     originalPrice: 3200,
     category: 'kids-bags',
-    image: '/src/assets/images/kids_backpack_pink_1786701703330.jpg',
+    image: kidsBunnyPinkImg,
     gallery: [
-      '/src/assets/images/kids_backpack_pink_1786701703330.jpg'
+      kidsBunnyPinkImg
     ],
     inStock: true,
     isNew: true,
@@ -132,9 +143,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2200,
     originalPrice: 2900,
     category: 'kids-bags',
-    image: '/src/assets/images/kids_dino_backpack_1786701742115.jpg',
+    image: kidsDinoBlueImg,
     gallery: [
-      '/src/assets/images/kids_dino_backpack_1786701742115.jpg'
+      kidsDinoBlueImg
     ],
     inStock: true,
     isNew: true,
@@ -149,9 +160,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2000,
     originalPrice: 2800,
     category: 'backpacks',
-    image: '/src/assets/images/nike_black_backpack_1786680488848.jpg',
+    image: nikeBackpackImg,
     gallery: [
-      '/src/assets/images/nike_black_backpack_1786680488848.jpg'
+      nikeBackpackImg
     ],
     inStock: true,
     isNew: true,
