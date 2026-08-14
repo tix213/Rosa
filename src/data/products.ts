@@ -14,58 +14,78 @@ export const DEFAULT_STORE_CONFIG: StoreConfig = {
 
 export const CATEGORIES: Category[] = [
   { id: 'all', name: 'جميع المعروضات', iconName: 'Sparkles' },
-  { id: 'women-handbags', name: 'Classic Handbags (حقائب كلاسيكية)', iconName: 'ShoppingBag' },
+  { id: 'women-handbags', name: 'حقائب يد وكتف كلاسيكية', iconName: 'ShoppingBag' },
+  { id: 'backpacks', name: 'حقائب ظهر ورياضية (Sacs à dos)', iconName: 'Compass' },
 ];
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
+    id: 'bag-hermes-blue-set',
+    code: 'ROSA-HR-SET01',
+    title: 'طقم حقيبة هيرميس الفاخرة باللون الأزرق الملكي (حقيبة + حزام جلد + علبة أصلية)',
+    description: 'طقم متكامل وفائق الفخامة من العلامة الراقية هيرميس باللون الأزرق الملكي الجذاب. يحتوي على حقيبة يد كلاسيكية فاخرة بقفل ذهبي ومفاتيح، حزام خصر جلدي أنيق بإبزيم H الذهبي، تعليقة الحصان الجلدية المميزة، وحزام كتف طويل، تأتي داخل علبة هيرميس البرتقالية الفخمة.',
+    price: 5000,
+    originalPrice: 6500,
+    category: 'women-handbags',
+    image: '/src/assets/images/hermes_blue_set_1786680461964.jpg',
+    gallery: [
+      '/src/assets/images/hermes_blue_set_1786680461964.jpg'
+    ],
+    inStock: true,
+    isNew: true,
+    isBestSeller: true,
+    material: 'جلد طبيعي فاخر مستورد + إكسسوارات ذهبية مختومة + علبة هدايا كاملة'
+  },
+  {
+    id: 'bag-gucci-mini-ophidia',
+    code: 'ROSA-GC-01',
+    title: 'حقيبة كتف غوتشي ميني بنقشة المونوغرام الفاخرة وسلسال ذهبي (Gucci)',
+    description: 'حقيبة كتف ويد ميني راقية من ماركة غوتشي العالمية بنقشة GG الأيقونية الكلاسيكية وحواف جلدية بنية فاخرة. تتميز بشعار GG الذهبي وسلسال كتف ذهبي أنيق مع مساحة ممتازة لحمل الهاتف، النقود، وأدوات التجميل.',
+    price: 3500,
+    originalPrice: 4600,
+    category: 'women-handbags',
+    image: '/src/assets/images/gucci_mini_bag_1786680473233.jpg',
+    gallery: [
+      '/src/assets/images/gucci_mini_bag_1786680473233.jpg'
+    ],
+    inStock: true,
+    isNew: true,
+    isBestSeller: true,
+    material: 'كانفاس عالي الجودة مع جلد متين وسلسال معدني ذهبي غير قابل لتغير اللون'
+  },
+  {
+    id: 'bag-nike-backpack-black',
+    code: 'ROSA-NK-01',
+    title: 'حقيبة ظهر نايكي الرياضية الأصلية مع مقلمة ملحقة (Nike Backpack)',
+    description: 'حقيبة ظهر عملية وأنيقة من نايكي باللون الأسود الكلاسيكي وشعار Nike الأبيض المميز. ممتازة للجامعة، المدرسة، الجيم، والسفر، مزودة بجيوب داخلية وخارجية متعددة ومقلمة برتقالية ملحقة، مع أحزمة أكتاف مبطنة ومريحة.',
+    price: 2000,
+    originalPrice: 2800,
+    category: 'backpacks',
+    image: '/src/assets/images/nike_black_backpack_1786680488848.jpg',
+    gallery: [
+      '/src/assets/images/nike_black_backpack_1786680488848.jpg'
+    ],
+    inStock: true,
+    isNew: true,
+    isBestSeller: true,
+    material: 'قماش أوكسفورد بوليستر مقاوم للمياه والتمزق مع سحابات متينة'
+  },
+  {
     id: 'bag-hurmes-classic',
     code: 'ROSA-HURMES-01',
-    title: 'حقيبة يد كلاسيكية فاخرة ماركة Hurmes (مستوردة بجودة عالية)',
-    description: 'حقيبة يد كلاسيكية فاخرة وأنيقة مستوردة بأعلى معايير الجودة من العلامة الشهيرة Hurmes. تتميز بتصميم بيج نيود راقي، خامة جلدية متينة مقاومة للخدش، مساحة داخلية رحبة ومنظمة مع سحاب معدني أنيق ومقابض يد مزدوجة مريحة بالإضافة إلى حزام كتف قابل للتعديل. قطعة مميزة تجمع بين الفخامة والعملية لتكمل إطلالتك في كافة المشاوير والمناسبات.',
+    title: 'حقيبة يد كلاسيكية فاخرة ماركة Hurmes بلون بيج نيود (مستوردة)',
+    description: 'حقيبة يد كلاسيكية فاخرة وأنيقة مستوردة بأعلى معايير الجودة من العلامة الشهيرة Hurmes. تتميز بتصميم بيج نيود راقي، خامة جلدية متينة مقاومة للخدش، مساحة داخلية رحبة ومنظمة مع سحاب معدني أنيق ومقابض يد مزدوجة مريحة بالإضافة إلى حزام كتف قابل للتعديل.',
     price: 3200,
     originalPrice: 4200,
     category: 'women-handbags',
     image: '/src/assets/images/hermes_classic_bag_1786678118984.jpg',
     gallery: [
-      '/src/assets/images/hermes_classic_bag_1786678118984.jpg',
-      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80'
+      '/src/assets/images/hermes_classic_bag_1786678118984.jpg'
     ],
     inStock: true,
     isNew: true,
     isBestSeller: true,
     material: 'جلد فاخر مستورد عالي الجودة مع إكسسوارات معدنية ذهبية أصلية'
   }
-export const INITIAL_PRODUCTS: Product[] = [
-  {
-    id: 'bag-hurmes-classic',
-    code: 'ROSA-01',
-    title: 'حقيبة يد كلاسيكية فاخرة ماركة Hurmes',
-    description: 'وصف الحقيبة هنا...',
-    price: 3200,             // السعر الحالي بالدينار
-    originalPrice: 4200,     // السعر قبل الخصم (اختياري)
-    category: 'women-handbags', // اسم القسم
-    image: 'https://example.com/bag-image.jpg', // رابط الصورة المباشر
-    gallery: [
-      'https://example.com/bag-image-1.jpg',
-      'https://example.com/bag-image-2.jpg'
-    ],
-    inStock: true,           // true إذا كانت متوفرة، false إذا نفدت
-    isNew: true,             // وسم "جديد"
-    isBestSeller: true,      // وسم "الأكثر مبيعاً"
-    material: 'جلد مستورد فاخر'
-  },
-  // 👈 يمكنك إضافة المنتج الثاني هنا بنفس التنسيق:
-  {
-    id: 'bag-02',
-    code: 'ROSA-02',
-    title: 'اسم الحقيبة الثانية',
-    description: 'وصف الحقيبة الثانية...',
-    price: 2800,
-    originalPrice: 3500,
-    category: 'women-handbags',
-    image: 'https://your-image-url.jpg',
-    inStock: true,
-    material: 'جلد طبيعي'
-  }
 ];
+
