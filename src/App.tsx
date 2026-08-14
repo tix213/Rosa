@@ -16,7 +16,11 @@ import { formatPhoneNumber } from './utils/whatsapp';
 export default function App() {
   // Store Config state with localStorage backup
   const [config, setConfig] = useState<StoreConfig>(() => {
-    const saved = localStorage.getItem('rosa_store_config');
+    // Clear old deprecated cache if it exists
+    if (localStorage.getItem('rosa_store_config')) {
+      localStorage.removeItem('rosa_store_config');
+    }
+    const saved = localStorage.getItem('rosa_store_config_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -25,7 +29,11 @@ export default function App() {
 
   // Products state with localStorage backup
   const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('rosa_products_list');
+    // Clear old deprecated cache if it exists
+    if (localStorage.getItem('rosa_products_list')) {
+      localStorage.removeItem('rosa_products_list');
+    }
+    const saved = localStorage.getItem('rosa_products_list_v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -54,11 +62,11 @@ export default function App() {
 
   // Sync to localStorage
   useEffect(() => {
-    localStorage.setItem('rosa_store_config', JSON.stringify(config));
+    localStorage.setItem('rosa_store_config_v2', JSON.stringify(config));
   }, [config]);
 
   useEffect(() => {
-    localStorage.setItem('rosa_products_list', JSON.stringify(products));
+    localStorage.setItem('rosa_products_list_v2', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
@@ -133,6 +141,18 @@ export default function App() {
     if (detailProduct && detailProduct.id === productId) {
       setDetailProduct(null);
     }
+  };
+
+  // Reset to defaults & clear local cache
+  const handleResetDefaults = () => {
+    localStorage.removeItem('rosa_store_config');
+    localStorage.removeItem('rosa_products_list');
+    localStorage.removeItem('rosa_store_config_v2');
+    localStorage.removeItem('rosa_products_list_v2');
+    localStorage.removeItem('rosa_cart_items');
+    setConfig(DEFAULT_STORE_CONFIG);
+    setProducts(INITIAL_PRODUCTS);
+    setCartItems([]);
   };
 
   // Save Store Config
@@ -327,6 +347,7 @@ export default function App() {
         config={config}
         onClose={() => setIsSettingsOpen(false)}
         onSaveConfig={handleSaveConfig}
+        onResetDefaults={handleResetDefaults}
       />
 
       {/* Add / Edit Product Modal (Shop Owner) */}

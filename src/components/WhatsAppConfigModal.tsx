@@ -7,6 +7,7 @@ interface WhatsAppConfigModalProps {
   config: StoreConfig;
   onClose: () => void;
   onSaveConfig: (newConfig: StoreConfig) => void;
+  onResetDefaults?: () => void;
 }
 
 export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
@@ -14,6 +15,7 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
   config,
   onClose,
   onSaveConfig,
+  onResetDefaults,
 }) => {
   if (!isOpen) return null;
 
@@ -135,7 +137,7 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
             />
           </div>
 
-          <div className="pt-3">
+          <div className="pt-3 space-y-2">
             <button
               type="submit"
               className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-950/60 cursor-pointer"
@@ -143,6 +145,21 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
               <Save className="w-4 h-4" />
               <span>حفظ الإعدادات</span>
             </button>
+
+            {onResetDefaults && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm('هل تريد استعادة جميع المنتجات والأسعار الافتراضية للجزائر (د.ج) ومسح الكاش؟')) {
+                    onResetDefaults();
+                    onClose();
+                  }
+                }}
+                className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs rounded-xl border border-zinc-800 transition-all cursor-pointer text-center"
+              >
+                🔄 إعادة تعيين المتجر للمنتجات والأسعار الافتراضية
+              </button>
+            )}
           </div>
         </form>
 
