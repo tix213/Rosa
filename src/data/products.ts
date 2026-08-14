@@ -13,7 +13,9 @@ import kidsBunnyPinkImg from '../assets/images/kids_backpack_pink_1786701703330.
 import kidsBunnyPurpleImg from '../assets/images/kids_backpack_purple_1786703988753.jpg';
 import kidsDinoBlueImg from '../assets/images/kids_dino_backpack_1786701742115.jpg';
 import nikeBackpackImg from '../assets/images/nike_black_backpack_1786680488848.jpg';
-
+import cats1 from '../assets/images/20260814_114804.jpg';
+import cats2 from '../assets/images/20260814_114815.jpg';
+import cats3 from '..src/assets/images/20260814_114756.jpg';
 export const HERO_BANNER_IMAGE = heroBannerImg;
 export const BRAND_LOGO_IMAGE = brandLogoImg;
 
@@ -125,18 +127,18 @@ export const INITIAL_PRODUCTS: Product[] = [
   {
     id: 'bag-crossbody-emerald',
     code: 'ROSA-CR-02',
-    title: 'حقيبة كروس بودي جلد فاخر باللون الأخضر الزمردي الملكي مع قفل ذهبي',
-    description: 'حقيبة كتف وكروس أنيقة للغاية مصنوعة من أجود أنواع الجلد الناعم بلون أخضر زمردي جذاب يمنح إطلالتك فخامة استثنائية. مزودة بسلسال كتف معدني ذهبي لامع وقفل أوتوماتيكي محكم مع تقسيم داخلي منظم.',
+    title: 'حقيبة كروس كات بمختلف الألوان',
+    description: 'حقيبة كتف وكروس أنيقة للغاية مصنوعة من أجود أنواع الجلد الناعم بمختلف الألوان الجذابة يمنح إطلالتك فخامة استثنائية. مزودة بسلسال كتف  مع تقسيم داخلي منظم.',
     price: 3800,
     originalPrice: 4800,
     category: 'women-crossbody',
     image: emeraldBagImg,
     colors: [
-      { name: 'أخضر زمردي (Emerald Green)', colorCode: '#065F46', image: emeraldBagImg }
+      { name: 'أخضر زمردي (Emerald Green)', colorCode: '#065F46', image: cats1  }
     ],
     gallery: [
-      emeraldBagImg
-    ],
+      cats1 
+    ][cats2] [cats3] ,
     inStock: true,
     isNew: true,
     isBestSeller: false,
