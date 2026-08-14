@@ -9,7 +9,7 @@ import eveningClutchImg from '../assets/images/evening_glitter_clutch_1786701714
 import hermesClassicImg from '../assets/images/hermes_classic_bag_1786678118984.jpg';
 import kidsBunnyPinkImg from '../assets/images/kids_backpack_pink_1786701703330.jpg';
 import kidsDinoBlueImg from '../assets/images/kids_dino_backpack_1786701742115.jpg';
-import nikeBackpackImg from '../assets/images/images (35).jpeg; 
+import nikeBackpackImg from '../assets/images/images (35).jpeg'; 
 
 export const HERO_BANNER_IMAGE = heroBannerImg;
 export const BRAND_LOGO_IMAGE = brandLogoImg;
