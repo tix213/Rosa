@@ -79,13 +79,13 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
             <input
               type="text"
               required
-              placeholder="مثال: 966501234567"
+              placeholder="مثال: 213550123456"
               value={whatsappNumber}
               onChange={(e) => setWhatsappNumber(e.target.value)}
               className="w-full bg-[#1b1417] border border-rose-900/40 rounded-xl px-3.5 py-2.5 text-sm font-mono text-left dir-ltr text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
             <p className="text-[11px] text-zinc-400 mt-1">
-              اكتبي الرقم بدون علامة + أو أصفار إضافية (مثلاً: 96650XXXXXXX أو 965XXXXXXXX)
+              اكتبي الرقم بدون علامة + أو أصفار إضافية (مثلاً في الجزائر: 2135XXXXXXXX أو 2136XXXXXXXX أو 2137XXXXXXXX)
             </p>
           </div>
 
@@ -113,7 +113,7 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
             <input
               type="text"
               required
-              placeholder="ر.س"
+              placeholder="د.ج أو DA"
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
               className="w-full bg-[#1b1417] border border-rose-900/40 rounded-xl px-3.5 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-rose-500"

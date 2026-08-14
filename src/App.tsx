@@ -280,6 +280,7 @@ export default function App() {
                 onOpenDetail={(prod) => setDetailProduct(prod)}
                 onAddToCart={(prod) => handleAddToCart(prod, 1)}
                 onEditProduct={handleStartEditProduct}
+                onDeleteProduct={handleDeleteProduct}
               />
             ))}
           </div>
@@ -306,6 +307,7 @@ export default function App() {
         onClose={() => setDetailProduct(null)}
         onAddToCart={handleAddToCart}
         onEditProduct={handleStartEditProduct}
+        onDeleteProduct={handleDeleteProduct}
       />
 
       {/* Cart Drawer */}

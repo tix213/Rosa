@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product, StoreConfig } from '../types';
-import { MessageCircle, ShoppingBag, Eye, Sparkles, Edit3 } from 'lucide-react';
+import { MessageCircle, ShoppingBag, Eye, Sparkles, Edit3, Trash2 } from 'lucide-react';
 import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductCardProps {
@@ -9,6 +9,7 @@ interface ProductCardProps {
   onOpenDetail: (product: Product) => void;
   onAddToCart: (product: Product) => void;
   onEditProduct?: (product: Product) => void;
+  onDeleteProduct?: (productId: string) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -17,12 +18,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onOpenDetail,
   onAddToCart,
   onEditProduct,
+  onDeleteProduct,
 }) => {
   const directWhatsAppUrl = buildSingleProductWhatsAppUrl(product, 1, config);
 
   const discountPercentage = product.originalPrice && product.originalPrice > product.price
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (confirm(`هل تريدين حذف المنتج "${product.title}" نهائياً من المتجر؟`)) {
+      onDeleteProduct?.(product.id);
+    }
+  };
 
   return (
     <div className="group relative bg-[#141414] rounded-2xl border border-rose-900/30 hover:border-rose-600/50 shadow-lg hover:shadow-2xl hover:shadow-rose-950/40 transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1">
@@ -63,19 +72,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
 
-        {/* Quick Edit button for owner */}
-        {onEditProduct && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onEditProduct(product);
-            }}
-            className="absolute bottom-2.5 left-2.5 z-20 p-2 rounded-full bg-[#181818]/90 hover:bg-rose-900 text-zinc-300 hover:text-white border border-rose-900/40 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md"
-            title="تعديل السعر والصور"
-          >
-            <Edit3 className="w-3.5 h-3.5" />
-          </button>
-        )}
+        {/* Quick Edit & Delete buttons for owner */}
+        <div className="absolute bottom-2.5 left-2.5 z-20 flex items-center gap-1.5">
+          {onEditProduct && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEditProduct(product);
+              }}
+              className="p-2 rounded-full bg-[#181818]/90 hover:bg-rose-900 text-zinc-300 hover:text-white border border-rose-900/40 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md cursor-pointer"
+              title="تعديل السعر والصور"
+            >
+              <Edit3 className="w-3.5 h-3.5" />
+            </button>
+          )}
+
+          {onDeleteProduct && (
+            <button
+              onClick={handleDelete}
+              className="p-2 rounded-full bg-red-950/90 hover:bg-red-800 text-red-300 hover:text-white border border-red-800/50 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md cursor-pointer"
+              title="حذف هذا المنتج من المتجر"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
 
         {/* Hover Quick View Overlay */}
         <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 backdrop-blur-[2px]">

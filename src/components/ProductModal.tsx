@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Product, StoreConfig } from '../types';
-import { X, MessageCircle, ShoppingBag, Plus, Minus, ShieldCheck, Sparkles, Share2, Check, Edit3 } from 'lucide-react';
+import { X, MessageCircle, ShoppingBag, Plus, Minus, ShieldCheck, Sparkles, Share2, Check, Edit3, Trash2 } from 'lucide-react';
 import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductModalProps {
@@ -9,6 +9,7 @@ interface ProductModalProps {
   onClose: () => void;
   onAddToCart: (product: Product, quantity: number) => void;
   onEditProduct?: (product: Product) => void;
+  onDeleteProduct?: (productId: string) => void;
 }
 
 export const ProductModal: React.FC<ProductModalProps> = ({
@@ -17,6 +18,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   onAddToCart,
   onEditProduct,
+  onDeleteProduct,
 }) => {
   if (!product) return null;
 
@@ -140,18 +142,35 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 )}
               </div>
 
-              {onEditProduct && (
-                <button
-                  onClick={() => {
-                    onClose();
-                    onEditProduct(product);
-                  }}
-                  className="px-3 py-1.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 hover:text-white border border-rose-800/40 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
-                >
-                  <Edit3 className="w-3.5 h-3.5" />
-                  <span>تعديل السعر والصور</span>
-                </button>
-              )}
+              <div className="flex items-center gap-1.5">
+                {onEditProduct && (
+                  <button
+                    onClick={() => {
+                      onClose();
+                      onEditProduct(product);
+                    }}
+                    className="px-3 py-1.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 hover:text-white border border-rose-800/40 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>تعديل السعر والصور</span>
+                  </button>
+                )}
+
+                {onDeleteProduct && (
+                  <button
+                    onClick={() => {
+                      if (confirm(`هل تريدين حذف المنتج "${product.title}" نهائياً من المتجر؟`)) {
+                        onDeleteProduct(product.id);
+                        onClose();
+                      }
+                    }}
+                    className="p-1.5 rounded-xl bg-red-950/60 hover:bg-red-900/80 text-red-300 hover:text-white border border-red-800/40 transition-all cursor-pointer"
+                    title="حذف المنتج من المتجر"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
             </div>
 
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-4">
