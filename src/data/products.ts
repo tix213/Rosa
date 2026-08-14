@@ -61,9 +61,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2000,
     originalPrice: 2200,
     category: 'backpacks',
-    image: src/assets/images/images (35).jpeg',
+    image: 'src/assets/images/images (35).jpeg',
     gallery: [
-      src/assets/images/images (35).jpeg'
+      'src/assets/images/images (35).jpeg'
     ],
     inStock: true,
     isNew: true,
