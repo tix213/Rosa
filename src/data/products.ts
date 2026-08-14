@@ -132,7 +132,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 3800,
     originalPrice: 4800,
     category: 'women-crossbody',
-    image: emeraldBagImg,
+    image:cats1,
     colors: [
       { name: 'أخضر زمردي (Emerald Green)', colorCode: '#065F46', image: cats1  }
     ],
