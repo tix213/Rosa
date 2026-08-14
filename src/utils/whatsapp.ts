@@ -21,17 +21,21 @@ export function buildSingleProductWhatsAppUrl(
   customerName?: string,
   customerWilaya?: string,
   customerPhone?: string,
-  customerAddress?: string
+  customerAddress?: string,
+  selectedColor?: string
 ): string {
   const cleanPhone = formatPhoneNumber(config.whatsappNumber);
   const total = product.price * quantity;
 
-  let text = `مرحباً متجر *${config.storeName}* 🇩🇿✨\n\n`;
+  let text = `مرحباً بوتيك *${config.storeName}* 🇩🇿🌸\n\n`;
   text += `أود طلب هذه الحقيبة من متجركم:\n`;
   text += `━━━━━━━━━━━━━━━━━━━━\n`;
-  text += `👜 *المنتج:* ${product.title}\n`;
+  text += `👜 *الموديل:* ${product.title}\n`;
   if (product.code) {
     text += `🏷️ *كود الحقيبة:* ${product.code}\n`;
+  }
+  if (selectedColor) {
+    text += `🎨 *اللون المختار:* ${selectedColor}\n`;
   }
   text += `💰 *السعر:* ${product.price} ${config.currency}\n`;
   text += `🔢 *الكمية:* ${quantity}\n`;
@@ -72,7 +76,7 @@ export function buildCartWhatsAppUrl(
   const totalPrice = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
 
-  let text = `مرحباً متجر *${config.storeName}* 🇩🇿✨\n\n`;
+  let text = `مرحباً بوتيك *${config.storeName}* 🇩🇿🌸\n\n`;
   text += `أود تأكيد طلب الحقائب التالية عبر السلة:\n`;
   text += `━━━━━━━━━━━━━━━━━━━━\n`;
 
@@ -81,6 +85,9 @@ export function buildCartWhatsAppUrl(
     text += `${index + 1}. *${item.product.title}*\n`;
     if (item.product.code) {
       text += `   كود: ${item.product.code}\n`;
+    }
+    if (item.selectedColor) {
+      text += `   🎨 اللون: ${item.selectedColor}\n`;
     }
     text += `   الكمية: ${item.quantity} | السعر: ${itemTotal} ${config.currency}\n\n`;
   });

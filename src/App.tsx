@@ -22,7 +22,7 @@ export default function App() {
 
   // Cart state with localStorage backup
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('rosa_cart_items');
+    const saved = localStorage.getItem('rosa_pink_cart_items');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -35,42 +35,59 @@ export default function App() {
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'popular'>('default');
   
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [detailSelectedColor, setDetailSelectedColor] = useState<string | undefined>(undefined);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('rosa_cart_items', JSON.stringify(cartItems));
+    localStorage.setItem('rosa_pink_cart_items', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Cart handlers
-  const handleAddToCart = (product: Product, quantity: number = 1) => {
+  // Open modal with specific color
+  const handleOpenModal = (product: Product, selectedColor?: string) => {
+    setDetailProduct(product);
+    setDetailSelectedColor(selectedColor);
+  };
+
+  // Cart handlers (matching product ID + selectedColor)
+  const handleAddToCart = (product: Product, quantity: number = 1, selectedColor?: string) => {
+    // If no color selected and product has colors, default to first color
+    const effectiveColor = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0].name : undefined);
+
     setCartItems((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+      const existingIndex = prev.findIndex(
+        (item) => item.product.id === product.id && item.selectedColor === effectiveColor
+      );
+
+      if (existingIndex > -1) {
+        const updated = [...prev];
+        updated[existingIndex].quantity += quantity;
+        return updated;
       }
-      return [...prev, { product, quantity }];
+      return [...prev, { product, quantity, selectedColor: effectiveColor }];
     });
     setIsCartOpen(true);
   };
 
-  const handleUpdateQuantity = (productId: string, quantity: number) => {
+  const handleUpdateQuantity = (productId: string, quantity: number, selectedColor?: string) => {
     if (quantity <= 0) {
-      handleRemoveItem(productId);
+      handleRemoveItem(productId, selectedColor);
       return;
     }
     setCartItems((prev) =>
       prev.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.product.id === productId && item.selectedColor === selectedColor
+          ? { ...item, quantity }
+          : item
       )
     );
   };
 
-  const handleRemoveItem = (productId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
+  const handleRemoveItem = (productId: string, selectedColor?: string) => {
+    setCartItems((prev) =>
+      prev.filter(
+        (item) => !(item.product.id === productId && item.selectedColor === selectedColor)
+      )
+    );
   };
 
   const handleClearCart = () => {
@@ -94,7 +111,8 @@ export default function App() {
           p.title.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||
           (p.code && p.code.toLowerCase().includes(q)) ||
-          (p.material && p.material.toLowerCase().includes(q))
+          (p.material && p.material.toLowerCase().includes(q)) ||
+          p.colors?.some(c => c.name.toLowerCase().includes(q))
       );
     }
 
@@ -114,11 +132,11 @@ export default function App() {
   const cleanPhone = formatPhoneNumber(config.whatsappNumber);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0c0c0c] text-slate-200 selection:bg-rose-900/50 selection:text-rose-200 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#fdf2f4] via-[#fcf0f2] to-[#fae8eb] text-slate-800 selection:bg-pink-300 selection:text-pink-950 relative overflow-hidden">
       
-      {/* Subtle Luxury Ambient Glows */}
-      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-rose-950/15 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-amber-950/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+      {/* Subtle Feminine Ambient Glows */}
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-pink-300/30 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-rose-200/40 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       {/* Header */}
       <Header
@@ -127,7 +145,7 @@ export default function App() {
         products={products}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        onSelectProduct={(prod) => setDetailProduct(prod)}
+        onSelectProduct={(prod) => handleOpenModal(prod)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         onOpenCart={() => setIsCartOpen(true)}
       />
@@ -148,21 +166,21 @@ export default function App() {
         </div>
 
         {/* Toolbar: Sorting & Count */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 bg-[#141414] p-4 rounded-2xl border border-rose-900/30 shadow-lg">
-          <div className="text-xs sm:text-sm text-zinc-400 font-medium flex items-center gap-2 flex-wrap">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 bg-white p-4 rounded-2xl border border-pink-200 shadow-sm">
+          <div className="text-xs sm:text-sm text-slate-600 font-medium flex items-center gap-2 flex-wrap">
             <span>عرض نتائج:</span>
-            <span className="font-bold text-rose-300 bg-rose-950/60 px-2.5 py-0.5 rounded-full border border-rose-900/40">
-              {filteredProducts.length} منتج
+            <span className="font-bold text-pink-700 bg-pink-100 px-2.5 py-0.5 rounded-full border border-pink-200">
+              {filteredProducts.length} حقائب
             </span>
             {searchQuery && (
-              <span className="text-zinc-500">
-                للبحث عن: "<span className="text-rose-300 font-bold">{searchQuery}</span>"
+              <span className="text-slate-500">
+                للبحث عن: "<span className="text-pink-700 font-bold">{searchQuery}</span>"
               </span>
             )}
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-rose-400 hover:text-rose-200 underline cursor-pointer"
+                className="text-xs text-pink-600 hover:text-pink-800 underline cursor-pointer"
               >
                 إلغاء البحث
               </button>
@@ -170,15 +188,15 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2">
-            <SlidersHorizontal className="w-4 h-4 text-rose-400 shrink-0" />
-            <span className="text-xs text-zinc-400 shrink-0">ترتيب حسب:</span>
+            <SlidersHorizontal className="w-4 h-4 text-pink-600 shrink-0" />
+            <span className="text-xs text-slate-600 shrink-0">ترتيب حسب:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-[#1a1a1a] border border-rose-900/40 rounded-xl px-3 py-1.5 text-xs font-medium text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500/50 cursor-pointer"
+              className="bg-pink-50/70 border border-pink-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-pink-400 cursor-pointer"
             >
               <option value="default">الافتراضي (الموصى به)</option>
-              <option value="popular">الأكثر مبيعاً</option>
+              <option value="popular">الأكثر طلباً</option>
               <option value="price-asc">الأقل سعراً</option>
               <option value="price-desc">الأعلى سعراً</option>
             </select>
@@ -187,33 +205,33 @@ export default function App() {
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="bg-[#141414] rounded-3xl p-12 text-center border border-rose-900/30 shadow-xl max-w-md mx-auto my-8">
-            <div className="w-16 h-16 rounded-full bg-rose-950/50 text-rose-400 flex items-center justify-center mx-auto mb-4 border border-rose-900/40">
+          <div className="bg-white rounded-3xl p-12 text-center border border-pink-200 shadow-sm max-w-md mx-auto my-8">
+            <div className="w-16 h-16 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center mx-auto mb-4 border border-pink-200">
               <Sparkles className="w-8 h-8" />
             </div>
-            <h3 className="text-base font-bold text-slate-100 mb-1">لا توجد حقائب مطابقة للبحث</h3>
-            <p className="text-xs text-zinc-400 mb-6">
-              جرّبي كتابة كلمات بحث أخرى مثل "جلد"، "أطفال"، "كلاتش"، "ظهر"، أو استعراض تصنيف آخر.
+            <h3 className="text-base font-bold text-slate-800 mb-1">لا توجد حقائب مطابقة للبحث</h3>
+            <p className="text-xs text-slate-500 mb-6">
+              جرّبي كتابة كلمات بحث أخرى مثل "وردي"، "بيج"، "أرنوب"، "هيرميس"، أو استعراض قسم آخر.
             </p>
             <button
               onClick={() => {
                 setSelectedCategory('all');
                 setSearchQuery('');
               }}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-800 to-rose-900 text-white text-xs font-bold shadow-md hover:from-rose-700 hover:to-rose-800 transition-all border border-rose-700/50 cursor-pointer"
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 text-white text-xs font-bold shadow-md hover:from-pink-700 hover:to-rose-700 transition-all cursor-pointer"
             >
               عرض جميع تشكيلات الحقائب
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-5">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
                 config={config}
-                onOpenDetail={(prod) => setDetailProduct(prod)}
-                onAddToCart={(prod) => handleAddToCart(prod, 1)}
+                onOpenModal={handleOpenModal}
+                onAddToCart={handleAddToCart}
               />
             ))}
           </div>
@@ -223,10 +241,10 @@ export default function App() {
 
       {/* Floating Speed Dial WhatsApp Button */}
       <a
-        href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa للحقائب بالجزائر 🇩🇿، أود الاستفسار والطلب عبر الواتساب 👜💕')}`}
+        href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً بوتيك Rosa للحقائب بالجزائر 🇩🇿، أود الاستفسار والطلب عبر الواتساب 👜🌸')}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-emerald-950/80 flex items-center gap-2.5 transition-all duration-300 hover:scale-110 group border-2 border-emerald-400/30"
+        className="fixed bottom-6 left-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-emerald-700/40 flex items-center gap-2.5 transition-all duration-300 hover:scale-110 group border-2 border-white"
         title="تواصل مباشر بالواتساب"
       >
         <MessageCircle className="w-6 h-6 fill-current animate-pulse" />
@@ -236,8 +254,12 @@ export default function App() {
       {/* Product Detail Modal */}
       <ProductModal
         product={detailProduct}
+        initialColor={detailSelectedColor}
         config={config}
-        onClose={() => setDetailProduct(null)}
+        onClose={() => {
+          setDetailProduct(null);
+          setDetailSelectedColor(undefined);
+        }}
         onAddToCart={handleAddToCart}
       />
 

@@ -12,6 +12,12 @@ export interface Category {
   iconName: string;
 }
 
+export interface ProductColorVariant {
+  name: string;       // اسم اللون (مثل: وردي ناعم، بيج نيود، أسود ملكي)
+  colorCode: string;  // رمز اللون للعرض مثل #F472B6, #E5C49A, #18181B
+  image: string;      // الصورة الخاصة بهذا اللون
+}
+
 export interface Product {
   id: string;
   title: string;
@@ -20,6 +26,7 @@ export interface Product {
   originalPrice?: number;
   category: CategoryType;
   image: string;
+  colors?: ProductColorVariant[]; // ألوان المنتج مع صورها المخصصة
   gallery?: string[];
   inStock: boolean;
   isNew?: boolean;
@@ -31,6 +38,7 @@ export interface Product {
 export interface CartItem {
   product: Product;
   quantity: number;
+  selectedColor?: string; // اللون الذي اختارته الزبونة
 }
 
 export interface StoreConfig {

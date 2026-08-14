@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category, CategoryType, Product } from '../types';
+import { CategoryType, Product } from '../types';
 import { CATEGORIES } from '../data/products';
 import { Sparkles, ShoppingBag, Sparkle, Compass, Heart, Tag, CreditCard, Layers } from 'lucide-react';
 
@@ -33,9 +33,9 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-3 px-1">
-        <h3 className="text-base sm:text-lg font-bold text-slate-100 flex items-center gap-2">
-          <span>أقسام الحقائب المتوفرة</span>
-          <span className="text-xs font-medium text-rose-300 bg-rose-950/50 px-2.5 py-0.5 rounded-full border border-rose-800/40">
+        <h3 className="text-base sm:text-lg font-bold text-pink-950 flex items-center gap-2">
+          <span>أقسام وتشكيلات الحقائب</span>
+          <span className="text-xs font-semibold text-pink-700 bg-pink-100 px-3 py-0.5 rounded-full border border-pink-200">
             {products.length} حقائب متاحة
           </span>
         </h3>
@@ -50,13 +50,13 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`snap-start shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border cursor-pointer ${
+              className={`snap-start shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border cursor-pointer ${
                 isSelected
-                  ? 'bg-gradient-to-r from-rose-800 to-rose-950 text-white border-rose-500 shadow-lg shadow-rose-950/60 scale-102 ring-1 ring-rose-500/50'
-                  : 'bg-[#151515] hover:bg-[#1c1c1c] text-slate-300 hover:text-rose-200 border-rose-900/30 hover:border-rose-700/50'
+                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white border-pink-600 shadow-md shadow-pink-200 scale-102 ring-2 ring-pink-300'
+                  : 'bg-white hover:bg-pink-50 text-pink-900 border-pink-200 hover:border-pink-300 shadow-2xs'
               }`}
             >
-              <span className={isSelected ? 'text-amber-400' : 'text-rose-400'}>
+              <span className={isSelected ? 'text-pink-100' : 'text-pink-600'}>
                 {ICON_MAP[cat.iconName] || <Sparkles className="w-4 h-4" />}
               </span>
               <span>{cat.name}</span>
@@ -64,7 +64,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
                 className={`text-[11px] px-2 py-0.5 rounded-full font-bold ${
                   isSelected
                     ? 'bg-white/20 text-white'
-                    : 'bg-rose-950/70 text-rose-300 border border-rose-900/40'
+                    : 'bg-pink-100 text-pink-700 border border-pink-200'
                 }`}
               >
                 {count}
