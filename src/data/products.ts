@@ -36,5 +36,36 @@ export const INITIAL_PRODUCTS: Product[] = [
     isBestSeller: true,
     material: 'جلد فاخر مستورد عالي الجودة مع إكسسوارات معدنية ذهبية أصلية'
   }
+export const INITIAL_PRODUCTS: Product[] = [
+  {
+    id: 'bag-hurmes-classic',
+    code: 'ROSA-01',
+    title: 'حقيبة يد كلاسيكية فاخرة ماركة Hurmes',
+    description: 'وصف الحقيبة هنا...',
+    price: 3200,             // السعر الحالي بالدينار
+    originalPrice: 4200,     // السعر قبل الخصم (اختياري)
+    category: 'women-handbags', // اسم القسم
+    image: 'https://example.com/bag-image.jpg', // رابط الصورة المباشر
+    gallery: [
+      'https://example.com/bag-image-1.jpg',
+      'https://example.com/bag-image-2.jpg'
+    ],
+    inStock: true,           // true إذا كانت متوفرة، false إذا نفدت
+    isNew: true,             // وسم "جديد"
+    isBestSeller: true,      // وسم "الأكثر مبيعاً"
+    material: 'جلد مستورد فاخر'
+  },
+  // 👈 يمكنك إضافة المنتج الثاني هنا بنفس التنسيق:
+  {
+    id: 'bag-02',
+    code: 'ROSA-02',
+    title: 'اسم الحقيبة الثانية',
+    description: 'وصف الحقيبة الثانية...',
+    price: 2800,
+    originalPrice: 3500,
+    category: 'women-handbags',
+    image: 'https://your-image-url.jpg',
+    inStock: true,
+    material: 'جلد طبيعي'
+  }
 ];
-
