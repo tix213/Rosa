@@ -160,25 +160,25 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 {/* Customer Information Form */}
                 <div className="mt-4 pt-4 border-t border-rose-900/30 space-y-2 bg-[#191114] p-3.5 rounded-2xl border border-rose-900/30">
                   <p className="text-xs font-bold text-rose-300 mb-2">
-                    معلومات التوصيل لطلب الواتساب:
+                    معلومات التوصيل لطلب الواتساب (كافة الولايات 58):
                   </p>
                   <input
                     type="text"
-                    placeholder="الاسم الكامل"
+                    placeholder="الاسم واللقب"
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
                   />
                   <input
                     type="text"
-                    placeholder="المدينة / الحي والعنوان"
+                    placeholder="الولاية والبلدية والعنوان بالتفصيل"
                     value={customerCity}
                     onChange={(e) => setCustomerCity(e.target.value)}
                     className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
                   />
                   <input
                     type="text"
-                    placeholder="ملاحظات إضافية (اختياري)"
+                    placeholder="رقم هاتف ثانٍ أو ملاحظات للتوصيل (اختياري)"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"

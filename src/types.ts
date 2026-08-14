@@ -1,12 +1,11 @@
 export type CategoryType = 
   | 'all'
-  | 'necklaces' 
-  | 'earrings' 
-  | 'bracelets' 
-  | 'rings' 
-  | 'sets' 
-  | 'hair' 
-  | 'bags';
+  | 'women-handbags' 
+  | 'evening-bags' 
+  | 'backpacks' 
+  | 'kids-bags' 
+  | 'crossbody' 
+  | 'wallets';
 
 export interface Category {
   id: CategoryType;

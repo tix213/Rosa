@@ -23,11 +23,11 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
               <Sparkles className="w-5 h-5 text-amber-300" />
             </h3>
             <p className="text-xs sm:text-sm text-rose-200/80 leading-relaxed font-light mb-4">
-              وجهتك الأولى للأكسسوارات النسائية العصرية والمجوهرات الراقية. نتميز بدقة الاختيار، جودة المواد الملونة، وتسهيل الطلبات عبر الواتساب مباشرة.
+              وجهتكم الأولى في الجزائر لأفخم الحقائب النسائية وحقائب الأطفال والمدرسية بمختلف الأنواع والموديلات العصرية. نتميز بالجودة العالية وسرعة التوصيل لكافة ولايات الوطن.
             </p>
             <div className="flex items-center gap-2 text-xs text-rose-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>تلقي الطلبات والاستفسارات متوفر الآن عبر الواتساب</span>
+              <span>تلقي الطلبات والاستفسارات متوفر الآن عبر الواتساب (+213561001185)</span>
             </div>
           </div>
 
@@ -36,29 +36,29 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
             <h4 className="text-sm font-bold text-white mb-2">مميزات الشراء من متجرنا</h4>
             <div className="flex items-center gap-2.5 text-xs text-rose-200/90">
               <ShieldCheck className="w-4 h-4 text-amber-300 shrink-0" />
-              <span>قطع ومجوهرات مطلية بأعلى معايير الجودة</span>
+              <span>حقائب وخامات جلدية ممتازة ومطابقة للصور 100%</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs text-rose-200/90">
               <Truck className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>{config.locationText || 'توصيل لكافة المناطق وتأكيد فوري'}</span>
+              <span>{config.locationText || 'شحن متوفر وسريع لجميع الولايات (58 ولاية)'}</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs text-rose-200/90">
               <Heart className="w-4 h-4 text-rose-400 shrink-0" />
-              <span>تغليف إهداء مجاني فاخر لكافة الطلبات</span>
+              <span>الدفع عند الاستلام مع إمكانية المعاينة قبل الدفع</span>
             </div>
           </div>
 
           {/* Contact Direct */}
           <div>
-            <h4 className="text-sm font-bold text-white mb-3">تواصل معنا الآن</h4>
+            <h4 className="text-sm font-bold text-white mb-3">تواصل معنا عبر الواتساب</h4>
             <a
-              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa Accessories 👋')}`}
+              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa للحقائب بالجزائر 🇩🇿')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm transition-all shadow-md mb-3"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
-              <span>محادثة الواتساب المباشرة</span>
+              <span>محادثة الواتساب (0561001185)</span>
             </a>
 
             <div className="pt-2">

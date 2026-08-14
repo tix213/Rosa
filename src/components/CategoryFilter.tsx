@@ -1,7 +1,7 @@
 import React from 'react';
 import { Category, CategoryType, Product } from '../types';
 import { CATEGORIES } from '../data/products';
-import { Sparkles, Gem, Sparkle, CircleDot, Circle, Crown, Scissors, ShoppingBag } from 'lucide-react';
+import { Sparkles, ShoppingBag, Sparkle, Compass, Heart, Tag, CreditCard } from 'lucide-react';
 
 interface CategoryFilterProps {
   selectedCategory: CategoryType;
@@ -11,13 +11,12 @@ interface CategoryFilterProps {
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Sparkles: <Sparkles className="w-4 h-4" />,
-  Gem: <Gem className="w-4 h-4" />,
-  Sparkle: <Sparkle className="w-4 h-4" />,
-  CircleDot: <CircleDot className="w-4 h-4" />,
-  Circle: <Circle className="w-4 h-4" />,
-  Crown: <Crown className="w-4 h-4" />,
-  Scissors: <Scissors className="w-4 h-4" />,
   ShoppingBag: <ShoppingBag className="w-4 h-4" />,
+  Sparkle: <Sparkle className="w-4 h-4" />,
+  Compass: <Compass className="w-4 h-4" />,
+  Heart: <Heart className="w-4 h-4" />,
+  Tag: <Tag className="w-4 h-4" />,
+  CreditCard: <CreditCard className="w-4 h-4" />,
 };
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -34,9 +33,9 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
     <div className="mb-8">
       <div className="flex items-center justify-between mb-3 px-1">
         <h3 className="text-base sm:text-lg font-bold text-slate-100 flex items-center gap-2">
-          <span>تصنيفات الأكسسوارات</span>
+          <span>أقسام الحقائب</span>
           <span className="text-xs font-medium text-rose-300 bg-rose-950/50 px-2.5 py-0.5 rounded-full border border-rose-800/40">
-            {products.length} قطعة متاحة
+            {products.length} حقيبة متاحة
           </span>
         </h3>
       </div>

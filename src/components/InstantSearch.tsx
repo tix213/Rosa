@@ -14,14 +14,14 @@ interface InstantSearchProps {
 }
 
 const POPULAR_SEARCH_TAGS = [
-  'قلادة وردة',
-  'أقراط لؤلؤ',
-  'سوار فراشة',
-  'خواتم كريستال',
-  'طقم سهرة',
-  'ذهب عيار 18',
-  'روز جولد',
-  'حقيبة كلاتش'
+  'حقيبة يد',
+  'حقائب سهرة',
+  'حقائب أطفال',
+  'حقيبة ظهر',
+  'حقيبة كروس',
+  'محفظة نسائية',
+  'جلد إيطالي',
+  'كلاتش كريستال'
 ];
 
 export const InstantSearch: React.FC<InstantSearchProps> = ({
@@ -114,7 +114,7 @@ export const InstantSearch: React.FC<InstantSearchProps> = ({
         <input
           ref={inputRef}
           type="text"
-          placeholder="ابحثي مباشرة عن قلادة، سوار، أقراط، طقم..."
+          placeholder="ابحثي عن حقيبة يد، سهرة، أطفال، حقيبة ظهر، كود..."
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);

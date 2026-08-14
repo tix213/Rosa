@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {config.storeName}
               </h1>
               <p className="text-xs text-rose-400/90 font-medium">
-                متجر الإكسسوارات النسائية الأنيقة
+                متجر الحقائب النسائية وحقائب الأطفال بالجزائر 🇩🇿
               </p>
             </div>
           </div>
@@ -94,14 +94,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Direct WhatsApp button */}
             <a
-              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً Rosa Accessories، أود الاستفسار عن المجموعات المتاحة 💕')}`}
+              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa للحقائب بالجزائر 🇩🇿، أود الاستفسار والطلب عبر الواتساب 👜💕')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-md hover:shadow-emerald-900/40 hover:scale-102"
               title="تواصل مباشر عبر الواتساب"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
-              <span>الواتساب Direct</span>
+              <span>واتساب المتجر</span>
             </a>
 
             {/* Add product button (Shop Owner) */}

@@ -81,7 +81,7 @@ export const WhatsAppConfigModal: React.FC<WhatsAppConfigModalProps> = ({
             <input
               type="text"
               required
-              placeholder="مثال: 213550123456"
+              placeholder="مثال: 213561001185"
               value={whatsappNumber}
               onChange={(e) => setWhatsappNumber(e.target.value)}
               className="w-full bg-[#1b1417] border border-rose-900/40 rounded-xl px-3.5 py-2.5 text-sm font-mono text-left dir-ltr text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"

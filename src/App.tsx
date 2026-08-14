@@ -17,10 +17,10 @@ export default function App() {
   // Store Config state with localStorage backup
   const [config, setConfig] = useState<StoreConfig>(() => {
     // Clear old deprecated cache if it exists
-    if (localStorage.getItem('rosa_store_config')) {
-      localStorage.removeItem('rosa_store_config');
-    }
-    const saved = localStorage.getItem('rosa_store_config_v2');
+    if (localStorage.getItem('rosa_store_config')) localStorage.removeItem('rosa_store_config');
+    if (localStorage.getItem('rosa_store_config_v2')) localStorage.removeItem('rosa_store_config_v2');
+
+    const saved = localStorage.getItem('rosa_bags_store_config_v3');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -30,10 +30,10 @@ export default function App() {
   // Products state with localStorage backup
   const [products, setProducts] = useState<Product[]>(() => {
     // Clear old deprecated cache if it exists
-    if (localStorage.getItem('rosa_products_list')) {
-      localStorage.removeItem('rosa_products_list');
-    }
-    const saved = localStorage.getItem('rosa_products_list_v2');
+    if (localStorage.getItem('rosa_products_list')) localStorage.removeItem('rosa_products_list');
+    if (localStorage.getItem('rosa_products_list_v2')) localStorage.removeItem('rosa_products_list_v2');
+
+    const saved = localStorage.getItem('rosa_bags_products_v3');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -62,11 +62,11 @@ export default function App() {
 
   // Sync to localStorage
   useEffect(() => {
-    localStorage.setItem('rosa_store_config_v2', JSON.stringify(config));
+    localStorage.setItem('rosa_bags_store_config_v3', JSON.stringify(config));
   }, [config]);
 
   useEffect(() => {
-    localStorage.setItem('rosa_products_list_v2', JSON.stringify(products));
+    localStorage.setItem('rosa_bags_products_v3', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
@@ -149,6 +149,8 @@ export default function App() {
     localStorage.removeItem('rosa_products_list');
     localStorage.removeItem('rosa_store_config_v2');
     localStorage.removeItem('rosa_products_list_v2');
+    localStorage.removeItem('rosa_bags_store_config_v3');
+    localStorage.removeItem('rosa_bags_products_v3');
     localStorage.removeItem('rosa_cart_items');
     setConfig(DEFAULT_STORE_CONFIG);
     setProducts(INITIAL_PRODUCTS);
@@ -276,9 +278,9 @@ export default function App() {
             <div className="w-16 h-16 rounded-full bg-rose-950/50 text-rose-400 flex items-center justify-center mx-auto mb-4 border border-rose-900/40">
               <Sparkles className="w-8 h-8" />
             </div>
-            <h3 className="text-base font-bold text-slate-100 mb-1">لا توجد أكسسوارات مطابقة</h3>
+            <h3 className="text-base font-bold text-slate-100 mb-1">لا توجد حقائب مطابقة للبحث</h3>
             <p className="text-xs text-zinc-400 mb-6">
-              جرّبي كتابة كلمات بحث أخرى، استخدام ميزة الاقتراحات التلقائية، أو استعراض تصنيف آخر.
+              جرّبي كتابة كلمات بحث أخرى مثل "جلد"، "أطفال"، "كلاتش"، "ظهر"، أو استعراض تصنيف آخر.
             </p>
             <button
               onClick={() => {
@@ -287,7 +289,7 @@ export default function App() {
               }}
               className="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-800 to-rose-900 text-white text-xs font-bold shadow-md hover:from-rose-700 hover:to-rose-800 transition-all border border-rose-700/50 cursor-pointer"
             >
-              عرض جميع المجموعات
+              عرض جميع تشكيلات الحقائب
             </button>
           </div>
         ) : (
