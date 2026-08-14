@@ -46,7 +46,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 3200,
     originalPrice: 4200,
     category: 'women-handbags',
-    image: hermesPinkImg,
+    image: cats1,
     colors: [
       { name: 'وردي ناعم (Soft Rose)', colorCode: '#F472B6', image: hermesPinkImg },
       { name: 'بيج نيود (Nude Beige)', colorCode: '#D8B48D', image: hermesClassicImg },
