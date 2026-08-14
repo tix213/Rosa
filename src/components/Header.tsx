@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Settings, Plus, Sparkles, MessageCircle } from 'lucide-react';
+import { ShoppingBag, Sparkles, MessageCircle } from 'lucide-react';
 import { StoreConfig, Product, CategoryType } from '../types';
 import { BRAND_LOGO_IMAGE } from '../data/products';
 import { formatPhoneNumber } from '../utils/whatsapp';
@@ -14,8 +14,6 @@ interface HeaderProps {
   onSelectProduct: (product: Product) => void;
   onSelectCategory: (category: CategoryType) => void;
   onOpenCart: () => void;
-  onOpenSettings: () => void;
-  onOpenAddProduct: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,8 +25,6 @@ export const Header: React.FC<HeaderProps> = ({
   onSelectProduct,
   onSelectCategory,
   onOpenCart,
-  onOpenSettings,
-  onOpenAddProduct,
 }) => {
   const cleanPhone = formatPhoneNumber(config.whatsappNumber);
 

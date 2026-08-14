@@ -96,14 +96,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           <div className="mt-4 pt-3 border-t border-rose-900/30 text-xs text-rose-300 flex items-center justify-between">
             <div className="flex items-center gap-1.5 font-medium">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>قطع عالية الجودة مقاومة للتغير</span>
+              <span>قطع عالية الجودة مستوردة</span>
             </div>
+            
             <button
               onClick={handleCopyLink}
-              className="text-zinc-400 hover:text-rose-300 flex items-center gap-1 transition-colors"
+              className="text-zinc-400 hover:text-rose-300 flex items-center gap-1 transition-colors text-[11px]"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
-              <span>{copied ? 'تم نسخ الرابط' : 'مشاركة'}</span>
+              <span>{copied ? 'تم النسخ' : 'مشاركة'}</span>
             </button>
           </div>
         </div>

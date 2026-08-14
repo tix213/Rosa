@@ -59,11 +59,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     title: 'حقيبة ظهر نايكي الرياضية الأصلية مع مقلمة ملحقة (Nike Backpack)',
     description: 'حقيبة ظهر عملية وأنيقة من نايكي باللون الأسود الكلاسيكي وشعار Nike الأبيض المميز. ممتازة للجامعة، المدرسة، الجيم، والسفر، مزودة بجيوب داخلية وخارجية متعددة ومقلمة برتقالية ملحقة، مع أحزمة أكتاف مبطنة ومريحة.',
     price: 2000,
-    originalPrice: 2200,
+    originalPrice: 2800,
     category: 'backpacks',
-    image: 'src/assets/images/images (35).jpeg',
+    image: '/src/assets/images/nike_black_backpack_1786680488848.jpg',
     gallery: [
-    '  src/assets/images/images (35).jpeg'
+      '/src/assets/images/nike_black_backpack_1786680488848.jpg'
     ],
     inStock: true,
     isNew: true,

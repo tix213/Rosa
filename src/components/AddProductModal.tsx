@@ -25,12 +25,12 @@ interface AddProductModalProps {
 }
 
 const SAMPLE_IMAGES = [
-  { name: 'قلادة ذهبية زركون', url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80' },
-  { name: 'أقراط لؤلؤ', url: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=800&q=80' },
-  { name: 'سوار فراشة روز جولد', url: 'https://images.unsplash.com/photo-1611591475170-438492d7736f?auto=format&fit=crop&w=800&q=80' },
-  { name: 'خواتم كريستال', url: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80' },
-  { name: 'طقم سهرة ملكي', url: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80' },
-  { name: 'حقيبة كلاتش ذهبية', url: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80' }
+  { name: 'حقيبة يد كلاسيكية بيج', url: '/src/assets/images/hermes_classic_bag_1786678118984.jpg' },
+  { name: 'طقم هيرميس أزرق ملكي', url: '/src/assets/images/hermes_blue_set_1786680461964.jpg' },
+  { name: 'حقيبة غوتشي مونوغرام', url: '/src/assets/images/gucci_mini_bag_1786680473233.jpg' },
+  { name: 'حقيبة ظهر نايكي سوداء', url: '/src/assets/images/nike_black_backpack_1786680488848.jpg' },
+  { name: 'حقيبة كلاتش سهرات', url: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80' },
+  { name: 'حقيبة ظهر أطفال', url: 'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80' }
 ];
 
 export const AddProductModal: React.FC<AddProductModalProps> = ({
@@ -46,7 +46,7 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   const [code, setCode] = useState('');
   const [price, setPrice] = useState<number | ''>('');
   const [originalPrice, setOriginalPrice] = useState<number | ''>('');
-  const [category, setCategory] = useState<CategoryType>('necklaces');
+  const [category, setCategory] = useState<CategoryType>('women-handbags');
   const [imageUrl, setImageUrl] = useState('');
   const [galleryUrls, setGalleryUrls] = useState<string[]>([]);
   const [description, setDescription] = useState('');

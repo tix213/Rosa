@@ -17,19 +17,8 @@ export default function App() {
     return DEFAULT_STORE_CONFIG;
   });
 
-  // Products state - only the single Hurmes classic handbag
-  const [products] = useState<Product[]>(() => {
-    // Clear any previous cached lists
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('rosa_store_config');
-      localStorage.removeItem('rosa_products_list');
-      localStorage.removeItem('rosa_store_config_v2');
-      localStorage.removeItem('rosa_products_list_v2');
-      localStorage.removeItem('rosa_bags_store_config_v3');
-      localStorage.removeItem('rosa_bags_products_v3');
-    }
-    return INITIAL_PRODUCTS;
-  });
+  // Products state
+  const [products] = useState<Product[]>(INITIAL_PRODUCTS);
 
   // Cart state with localStorage backup
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -47,15 +36,6 @@ export default function App() {
   
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  // Sync to localStorage
-  useEffect(() => {
-    localStorage.setItem('rosa_bags_store_config_v3', JSON.stringify(config));
-  }, [config]);
-
-  useEffect(() => {
-    localStorage.setItem('rosa_bags_products_v3', JSON.stringify(products));
-  }, [products]);
 
   useEffect(() => {
     localStorage.setItem('rosa_cart_items', JSON.stringify(cartItems));
