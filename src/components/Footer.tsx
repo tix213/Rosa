@@ -5,10 +5,10 @@ import { formatPhoneNumber } from '../utils/whatsapp';
 
 interface FooterProps {
   config: StoreConfig;
-  onOpenSettings: () => void;
+  onOpenSettings?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
+export const Footer: React.FC<FooterProps> = ({ config }) => {
   const cleanPhone = formatPhoneNumber(config.whatsappNumber);
 
   return (
@@ -61,14 +61,9 @@ export const Footer: React.FC<FooterProps> = ({ config, onOpenSettings }) => {
               <span>محادثة الواتساب (0561001185)</span>
             </a>
 
-            <div className="pt-2">
-              <button
-                onClick={onOpenSettings}
-                className="text-xs text-rose-300 hover:text-white underline transition-colors"
-              >
-                تغيير رقم الواتساب أو اسم المتجر
-              </button>
-            </div>
+            <p className="text-xs text-rose-300/80">
+              خدمة العملاء متواجدة يومياً للرد على كافة استفساراتكم وتأكيد طلبياتكم.
+            </p>
           </div>
 
         </div>

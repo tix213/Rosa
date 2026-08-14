@@ -30,11 +30,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ config }) => {
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
-          تأنقي بأجمل الحقائب النسائية وحقائب الأطفال مع <span className="bg-gradient-to-r from-rose-200 via-amber-200 to-rose-300 bg-clip-text text-transparent">{config.storeName}</span>
+          تأنقي بأفخم الحقائب الكلاسيكية مع <span className="bg-gradient-to-r from-rose-200 via-amber-200 to-rose-300 bg-clip-text text-transparent">{config.storeName}</span>
         </h2>
 
         <p className="text-sm sm:text-base text-rose-200/90 max-w-2xl mx-auto font-light leading-relaxed mb-8">
-          أهلاً وسهلاً بكم في متجر Rosa بالجزائر. نوفر لكم أحدث وأرقى موديلات حقائب اليد والكتف، حقائب السهرات والأعراس، حقائب الظهر العصرية، وحقائب الأطفال والمدرسية بمختلف الأنواع. اطلبوا الآن مباشرة عبر الواتساب مع تأكيد فوري!
+          أهلاً وسهلاً بكم في متجر Rosa بالجزائر. نوفر لكم تشكيلات حقائب اليد الكلاسيكية المستوردة بأعلى معايير الجودة والخامات الجلدية الراقية. اطلبوا الآن مباشرة عبر الواتساب مع تأكيد فوري وشحن لكافة الولايات الـ 58 والدفع عند الاستلام!
         </p>
 
         {/* Call to action buttons */}

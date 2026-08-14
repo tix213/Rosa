@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product, StoreConfig } from '../types';
-import { MessageCircle, ShoppingBag, Eye, Sparkles, Edit3, Trash2 } from 'lucide-react';
+import { MessageCircle, ShoppingBag, Eye, Sparkles } from 'lucide-react';
 import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductCardProps {
@@ -8,8 +8,6 @@ interface ProductCardProps {
   config: StoreConfig;
   onOpenDetail: (product: Product) => void;
   onAddToCart: (product: Product) => void;
-  onEditProduct?: (product: Product) => void;
-  onDeleteProduct?: (productId: string) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -17,21 +15,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   config,
   onOpenDetail,
   onAddToCart,
-  onEditProduct,
-  onDeleteProduct,
 }) => {
   const directWhatsAppUrl = buildSingleProductWhatsAppUrl(product, 1, config);
 
   const discountPercentage = product.originalPrice && product.originalPrice > product.price
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
-
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (confirm(`هل تريدين حذف المنتج "${product.title}" نهائياً من المتجر؟`)) {
-      onDeleteProduct?.(product.id);
-    }
-  };
 
   return (
     <div className="group relative bg-[#141414] rounded-2xl border border-rose-900/30 hover:border-rose-600/50 shadow-lg hover:shadow-2xl hover:shadow-rose-950/40 transition-all duration-300 flex flex-col overflow-hidden transform hover:-translate-y-1">
@@ -47,7 +36,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           referrerPolicy="no-referrer"
           loading="lazy"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80';
+            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80';
           }}
         />
 
@@ -72,32 +61,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
 
-        {/* Quick Edit & Delete buttons for owner */}
-        <div className="absolute bottom-2.5 left-2.5 z-20 flex items-center gap-1.5">
-          {onEditProduct && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onEditProduct(product);
-              }}
-              className="p-2 rounded-full bg-[#181818]/90 hover:bg-rose-900 text-zinc-300 hover:text-white border border-rose-900/40 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md cursor-pointer"
-              title="تعديل السعر والصور"
-            >
-              <Edit3 className="w-3.5 h-3.5" />
-            </button>
-          )}
-
-          {onDeleteProduct && (
-            <button
-              onClick={handleDelete}
-              className="p-2 rounded-full bg-red-950/90 hover:bg-red-800 text-red-300 hover:text-white border border-red-800/50 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md cursor-pointer"
-              title="حذف هذا المنتج من المتجر"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-            </button>
-          )}
-        </div>
-
         {/* Hover Quick View Overlay */}
         <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 backdrop-blur-[2px]">
           <button
@@ -119,10 +82,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {/* Category & Product Code */}
           <div className="flex items-center justify-between text-[11px] text-zinc-400 mb-1">
             <span className="font-mono bg-[#1c1c1c] text-rose-300/80 px-1.5 py-0.5 rounded border border-rose-900/30">
-              {product.code || 'ROSA-ACC'}
+              {product.code || 'ROSA-BAG'}
             </span>
             <span className={product.inStock ? 'text-emerald-400 font-medium' : 'text-rose-400'}>
-              {product.inStock ? '• متوفر بالمتجر' : 'غير متوفر'}
+              {product.inStock ? '• متوفر بالمحل' : 'غير متوفر'}
             </span>
           </div>
 
@@ -148,15 +111,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
             </div>
-
-            {onEditProduct && (
-              <button
-                onClick={() => onEditProduct(product)}
-                className="text-[11px] text-rose-400 hover:text-rose-200 underline font-medium cursor-pointer"
-              >
-                تعديل السعر
-              </button>
-            )}
           </div>
 
           {/* Action Buttons */}
@@ -176,7 +130,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {/* Add to Cart Button */}
             <button
               onClick={() => onAddToCart(product)}
-              className="col-span-1 p-2.5 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 text-rose-200 border border-rose-800/40 transition-all flex items-center justify-center hover:scale-105 active:scale-95"
+              className="col-span-1 p-2.5 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 text-rose-200 border border-rose-800/40 transition-all flex items-center justify-center hover:scale-105 active:scale-95 cursor-pointer"
               title="أضفي للسلة"
             >
               <ShoppingBag className="w-4.5 h-4.5 text-rose-400" />

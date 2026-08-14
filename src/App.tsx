@@ -7,35 +7,26 @@ import { CategoryFilter } from './components/CategoryFilter';
 import { ProductCard } from './components/ProductCard';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
-import { WhatsAppConfigModal } from './components/WhatsAppConfigModal';
-import { AddProductModal } from './components/AddProductModal';
 import { Footer } from './components/Footer';
 import { MessageCircle, SlidersHorizontal, Sparkles } from 'lucide-react';
 import { formatPhoneNumber } from './utils/whatsapp';
 
 export default function App() {
   // Store Config state with localStorage backup
-  const [config, setConfig] = useState<StoreConfig>(() => {
-    // Clear old deprecated cache if it exists
-    if (localStorage.getItem('rosa_store_config')) localStorage.removeItem('rosa_store_config');
-    if (localStorage.getItem('rosa_store_config_v2')) localStorage.removeItem('rosa_store_config_v2');
-
-    const saved = localStorage.getItem('rosa_bags_store_config_v3');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.error(e); }
-    }
+  const [config] = useState<StoreConfig>(() => {
     return DEFAULT_STORE_CONFIG;
   });
 
-  // Products state with localStorage backup
-  const [products, setProducts] = useState<Product[]>(() => {
-    // Clear old deprecated cache if it exists
-    if (localStorage.getItem('rosa_products_list')) localStorage.removeItem('rosa_products_list');
-    if (localStorage.getItem('rosa_products_list_v2')) localStorage.removeItem('rosa_products_list_v2');
-
-    const saved = localStorage.getItem('rosa_bags_products_v3');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.error(e); }
+  // Products state - only the single Hurmes classic handbag
+  const [products] = useState<Product[]>(() => {
+    // Clear any previous cached lists
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('rosa_store_config');
+      localStorage.removeItem('rosa_products_list');
+      localStorage.removeItem('rosa_store_config_v2');
+      localStorage.removeItem('rosa_products_list_v2');
+      localStorage.removeItem('rosa_bags_store_config_v3');
+      localStorage.removeItem('rosa_bags_products_v3');
     }
     return INITIAL_PRODUCTS;
   });
@@ -55,10 +46,7 @@ export default function App() {
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'popular'>('default');
   
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
 
   // Sync to localStorage
   useEffect(() => {
@@ -107,59 +95,6 @@ export default function App() {
 
   const handleClearCart = () => {
     setCartItems([]);
-  };
-
-  // Product Add / Edit / Delete Handlers (Owner)
-  const handleStartAddProduct = () => {
-    setEditingProduct(null);
-    setIsAddProductOpen(true);
-  };
-
-  const handleStartEditProduct = (product: Product) => {
-    setEditingProduct(product);
-    setIsAddProductOpen(true);
-  };
-
-  const handleSaveProduct = (savedProduct: Product) => {
-    setProducts((prev) => {
-      const exists = prev.some((p) => p.id === savedProduct.id);
-      if (exists) {
-        return prev.map((p) => (p.id === savedProduct.id ? savedProduct : p));
-      }
-      return [savedProduct, ...prev];
-    });
-
-    // Also update detail view if open
-    if (detailProduct && detailProduct.id === savedProduct.id) {
-      setDetailProduct(savedProduct);
-    }
-  };
-
-  const handleDeleteProduct = (productId: string) => {
-    setProducts((prev) => prev.filter((p) => p.id !== productId));
-    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
-    if (detailProduct && detailProduct.id === productId) {
-      setDetailProduct(null);
-    }
-  };
-
-  // Reset to defaults & clear local cache
-  const handleResetDefaults = () => {
-    localStorage.removeItem('rosa_store_config');
-    localStorage.removeItem('rosa_products_list');
-    localStorage.removeItem('rosa_store_config_v2');
-    localStorage.removeItem('rosa_products_list_v2');
-    localStorage.removeItem('rosa_bags_store_config_v3');
-    localStorage.removeItem('rosa_bags_products_v3');
-    localStorage.removeItem('rosa_cart_items');
-    setConfig(DEFAULT_STORE_CONFIG);
-    setProducts(INITIAL_PRODUCTS);
-    setCartItems([]);
-  };
-
-  // Save Store Config
-  const handleSaveConfig = (newConfig: StoreConfig) => {
-    setConfig(newConfig);
   };
 
   // Filter & Sort products
@@ -215,8 +150,6 @@ export default function App() {
         onSelectProduct={(prod) => setDetailProduct(prod)}
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-        onOpenAddProduct={handleStartAddProduct}
       />
 
       {/* Main Container */}
@@ -301,8 +234,6 @@ export default function App() {
                 config={config}
                 onOpenDetail={(prod) => setDetailProduct(prod)}
                 onAddToCart={(prod) => handleAddToCart(prod, 1)}
-                onEditProduct={handleStartEditProduct}
-                onDeleteProduct={handleDeleteProduct}
               />
             ))}
           </div>
@@ -312,7 +243,7 @@ export default function App() {
 
       {/* Floating Speed Dial WhatsApp Button */}
       <a
-        href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa Accessories 💕، أود المساعدة في الطلب واستعراض التشكيلة')}`}
+        href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa للحقائب بالجزائر 🇩🇿، أود الاستفسار والطلب عبر الواتساب 👜💕')}`}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 left-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-emerald-950/80 flex items-center gap-2.5 transition-all duration-300 hover:scale-110 group border-2 border-emerald-400/30"
@@ -328,8 +259,6 @@ export default function App() {
         config={config}
         onClose={() => setDetailProduct(null)}
         onAddToCart={handleAddToCart}
-        onEditProduct={handleStartEditProduct}
-        onDeleteProduct={handleDeleteProduct}
       />
 
       {/* Cart Drawer */}
@@ -343,28 +272,9 @@ export default function App() {
         onClearCart={handleClearCart}
       />
 
-      {/* Settings Modal */}
-      <WhatsAppConfigModal
-        isOpen={isSettingsOpen}
-        config={config}
-        onClose={() => setIsSettingsOpen(false)}
-        onSaveConfig={handleSaveConfig}
-        onResetDefaults={handleResetDefaults}
-      />
-
-      {/* Add / Edit Product Modal (Shop Owner) */}
-      <AddProductModal
-        isOpen={isAddProductOpen}
-        onClose={() => setIsAddProductOpen(false)}
-        onSaveProduct={handleSaveProduct}
-        onDeleteProduct={handleDeleteProduct}
-        initialProduct={editingProduct}
-      />
-
       {/* Footer */}
       <Footer
         config={config}
-        onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
     </div>

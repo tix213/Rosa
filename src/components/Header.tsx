@@ -97,36 +97,17 @@ export const Header: React.FC<HeaderProps> = ({
               href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent('مرحباً متجر Rosa للحقائب بالجزائر 🇩🇿، أود الاستفسار والطلب عبر الواتساب 👜💕')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-md hover:shadow-emerald-900/40 hover:scale-102"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-md hover:shadow-emerald-900/40 hover:scale-102"
               title="تواصل مباشر عبر الواتساب"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
-              <span>واتساب المتجر</span>
+              <span className="hidden sm:inline">واتساب المتجر</span>
             </a>
-
-            {/* Add product button (Shop Owner) */}
-            <button
-              onClick={onOpenAddProduct}
-              className="p-2 sm:px-3 sm:py-2 rounded-full bg-rose-950/40 hover:bg-rose-900/50 text-rose-200 text-xs sm:text-sm font-medium flex items-center gap-1 transition-all border border-rose-800/40 hover:border-rose-600/60"
-              title="إضافة منتج جديد"
-            >
-              <Plus className="w-4 h-4 text-rose-400" />
-              <span className="hidden sm:inline">إضافة منتج</span>
-            </button>
-
-            {/* Settings Button */}
-            <button
-              onClick={onOpenSettings}
-              className="p-2.5 rounded-full bg-[#181818] hover:bg-rose-950/50 text-slate-300 hover:text-rose-200 transition-colors border border-rose-900/30"
-              title="إعدادات رقم الواتساب والمتجر"
-            >
-              <Settings className="w-4.5 h-4.5" />
-            </button>
 
             {/* Cart Button */}
             <button
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-full bg-gradient-to-r from-rose-800 to-rose-900 text-white hover:from-rose-700 hover:to-rose-800 transition-all shadow-lg shadow-rose-950/60 flex items-center justify-center border border-rose-700/50 hover:scale-105 active:scale-95"
+              className="relative p-2.5 rounded-full bg-gradient-to-r from-rose-800 to-rose-900 text-white hover:from-rose-700 hover:to-rose-800 transition-all shadow-lg shadow-rose-950/60 flex items-center justify-center border border-rose-700/50 hover:scale-105 active:scale-95 cursor-pointer"
               title="السلة"
             >
               <ShoppingBag className="w-4.5 h-4.5" />

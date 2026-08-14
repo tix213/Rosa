@@ -14,14 +14,12 @@ interface InstantSearchProps {
 }
 
 const POPULAR_SEARCH_TAGS = [
-  'حقيبة يد',
-  'حقائب سهرة',
-  'حقائب أطفال',
-  'حقيبة ظهر',
-  'حقيبة كروس',
-  'محفظة نسائية',
-  'جلد إيطالي',
-  'كلاتش كريستال'
+  'Hurmes',
+  'حقيبة يد كلاسيكية',
+  'Classic Handbags',
+  'جلد مستورد فاخر',
+  'بيج نيود',
+  '3200 د.ج'
 ];
 
 export const InstantSearch: React.FC<InstantSearchProps> = ({
