@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CartItem, StoreConfig } from '../types';
-import { X, Trash2, Plus, Minus, MessageCircle, ShoppingBag, ArrowRight } from 'lucide-react';
+import { X, Trash2, Plus, Minus, MessageCircle, ShoppingBag, ArrowRight, MapPin, Phone, User } from 'lucide-react';
 import { buildCartWhatsAppUrl } from '../utils/whatsapp';
+import { ALGERIA_WILAYAS } from '../data/algeriaWilayas';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -25,7 +26,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   if (!isOpen) return null;
 
   const [customerName, setCustomerName] = useState('');
-  const [customerCity, setCustomerCity] = useState('');
+  const [customerWilaya, setCustomerWilaya] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [customerAddress, setCustomerAddress] = useState('');
   const [notes, setNotes] = useState('');
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -35,7 +38,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     cartItems,
     config,
     customerName,
-    customerCity,
+    customerWilaya,
+    customerPhone,
+    customerAddress,
     notes
   );
 
@@ -47,15 +52,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         <div className="w-screen max-w-md bg-[#141414] shadow-2xl flex flex-col justify-between border-r border-rose-900/40 text-slate-200">
           
           {/* Drawer Header */}
-          <div className="p-5 bg-[#181114] border-b border-rose-900/30 flex items-center justify-between">
+          <div className="p-4 sm:p-5 bg-[#181114] border-b border-rose-900/30 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="p-2 bg-gradient-to-r from-rose-800 to-rose-900 text-white rounded-xl shadow-md border border-rose-700/50">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-100">سلة التسوق</h3>
+                <h3 className="text-lg font-bold text-slate-100">سلة مشتريات Rosa</h3>
                 <p className="text-xs text-rose-300">
-                  {totalCount > 0 ? `${totalCount} قطعة في السلة` : 'السلة فارغة'}
+                  {totalCount > 0 ? `${totalCount} حقيبة في السلة` : 'السلة فارغة'}
                 </p>
               </div>
             </div>
@@ -75,16 +80,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="w-16 h-16 rounded-full bg-rose-950/40 border border-rose-900/30 flex items-center justify-center mb-4 text-rose-400">
                   <ShoppingBag className="w-8 h-8" />
                 </div>
-                <p className="text-sm font-bold text-slate-200 mb-1">سلتك فارغة الآن 💕</p>
+                <p className="text-sm font-bold text-slate-200 mb-1">سلتك فارغة الآن 👜</p>
                 <p className="text-xs text-zinc-400 max-w-xs mb-6">
-                  استكشفي تشكيلة Rosa Accessories واختاري ما يعجبك لإضافته للسلة.
+                  استكشفي تشكيلة حقائب Rosa المميزة واختاري ما يناسبك لإضافته للسلة.
                 </p>
                 <button
                   onClick={onClose}
                   className="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-800 to-rose-900 text-white text-xs font-bold shadow-md hover:from-rose-700 hover:to-rose-800 transition-all flex items-center gap-1.5 border border-rose-700/50 cursor-pointer"
                 >
                   <ArrowRight className="w-4 h-4" />
-                  <span>تصفحي الأكسسوارات</span>
+                  <span>تصفح الحقائب</span>
                 </button>
               </div>
             ) : (
@@ -135,7 +140,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         <button
                           onClick={() => onRemoveItem(item.product.id)}
                           className="text-zinc-500 hover:text-rose-400 p-1 transition-colors"
-                          title="حذف القطعة"
+                          title="حذف الحقيبة"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -148,7 +153,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 </div>
 
                 {/* Clear Cart link */}
-                <div className="text-left pt-2">
+                <div className="text-left pt-1">
                   <button
                     onClick={onClearCart}
                     className="text-[11px] text-zinc-500 hover:text-rose-400 underline cursor-pointer"
@@ -157,28 +162,59 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   </button>
                 </div>
 
-                {/* Customer Information Form */}
-                <div className="mt-4 pt-4 border-t border-rose-900/30 space-y-2 bg-[#191114] p-3.5 rounded-2xl border border-rose-900/30">
-                  <p className="text-xs font-bold text-rose-300 mb-2">
-                    معلومات التوصيل لطلب الواتساب (كافة الولايات 58):
-                  </p>
+                {/* Algerian Customer Information Form */}
+                <div className="mt-4 pt-3 border-t border-rose-900/30 space-y-2.5 bg-[#191114] p-3.5 rounded-2xl border border-rose-900/30">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-rose-300">
+                    <MapPin className="w-3.5 h-3.5 text-rose-400" />
+                    <span>معلومات التوصيل (شحن لكافة الولايات الـ 58):</span>
+                  </div>
+
+                  <div className="relative">
+                    <User className="w-3.5 h-3.5 absolute right-2.5 top-2.5 text-zinc-500" />
+                    <input
+                      type="text"
+                      placeholder="الاسم واللقب"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl pr-8 pl-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Phone className="w-3.5 h-3.5 absolute right-2.5 top-2.5 text-zinc-500" />
+                    <input
+                      type="tel"
+                      placeholder="رقم الهاتف (05 / 06 / 07)"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl pr-8 pl-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                    />
+                  </div>
+
+                  <select
+                    value={customerWilaya}
+                    onChange={(e) => setCustomerWilaya(e.target.value)}
+                    className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                  >
+                    <option value="">-- اختر ولايتك (58 ولاية جزائرية) --</option>
+                    {ALGERIA_WILAYAS.map((w) => (
+                      <option key={w.code} value={w.name}>
+                        {w.name}
+                      </option>
+                    ))}
+                  </select>
+
                   <input
                     type="text"
-                    placeholder="الاسم واللقب"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder="البلدية والعنوان السكني بالتفصيل"
+                    value={customerAddress}
+                    onChange={(e) => setCustomerAddress(e.target.value)}
                     className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
                   />
+
                   <input
                     type="text"
-                    placeholder="الولاية والبلدية والعنوان بالتفصيل"
-                    value={customerCity}
-                    onChange={(e) => setCustomerCity(e.target.value)}
-                    className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
-                  />
-                  <input
-                    type="text"
-                    placeholder="رقم هاتف ثانٍ أو ملاحظات للتوصيل (اختياري)"
+                    placeholder="أي ملاحظات خاصة بالتوصيل (اختياري)"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full bg-[#20171b] border border-rose-900/40 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-rose-500"
@@ -205,11 +241,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 className="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-950/60"
               >
                 <MessageCircle className="w-5 h-5 fill-current" />
-                <span>إرسال السلة بالكامل عبر الواتساب</span>
+                <span>إرسال السلة عبر الواتساب (+213561001185)</span>
               </a>
 
-              <p className="text-[11px] text-zinc-500 text-center">
-                سيتم تحويلك مباشرة للواتساب لإتمام الطلب والتواصل مع خدمة العملاء
+              <p className="text-[11px] text-zinc-400 text-center">
+                🇩🇿 توصيل لكافة الولايات 58 والدفع يد بيد عند الاستلام
               </p>
             </div>
           )}

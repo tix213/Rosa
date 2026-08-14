@@ -1,7 +1,7 @@
 import React from 'react';
 import { Category, CategoryType, Product } from '../types';
 import { CATEGORIES } from '../data/products';
-import { Sparkles, ShoppingBag, Sparkle, Compass, Heart, Tag, CreditCard } from 'lucide-react';
+import { Sparkles, ShoppingBag, Sparkle, Compass, Heart, Tag, CreditCard, Layers } from 'lucide-react';
 
 interface CategoryFilterProps {
   selectedCategory: CategoryType;
@@ -17,6 +17,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   Heart: <Heart className="w-4 h-4" />,
   Tag: <Tag className="w-4 h-4" />,
   CreditCard: <CreditCard className="w-4 h-4" />,
+  Layers: <Layers className="w-4 h-4" />,
 };
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -33,9 +34,9 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
     <div className="mb-8">
       <div className="flex items-center justify-between mb-3 px-1">
         <h3 className="text-base sm:text-lg font-bold text-slate-100 flex items-center gap-2">
-          <span>أقسام الحقائب</span>
+          <span>أقسام الحقائب المتوفرة</span>
           <span className="text-xs font-medium text-rose-300 bg-rose-950/50 px-2.5 py-0.5 rounded-full border border-rose-800/40">
-            {products.length} حقيبة متاحة
+            {products.length} حقائب متاحة
           </span>
         </h3>
       </div>

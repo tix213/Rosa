@@ -1,11 +1,10 @@
 export type CategoryType = 
   | 'all'
   | 'women-handbags' 
+  | 'women-crossbody' 
   | 'evening-bags' 
-  | 'backpacks' 
   | 'kids-bags' 
-  | 'crossbody' 
-  | 'wallets';
+  | 'backpacks';
 
 export interface Category {
   id: CategoryType;
