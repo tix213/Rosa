@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product, StoreConfig } from '../types';
-import { MessageCircle, ShoppingBag, Eye, Sparkles } from 'lucide-react';
+import { MessageCircle, ShoppingBag, Eye, Sparkles, Edit3 } from 'lucide-react';
 import { buildSingleProductWhatsAppUrl } from '../utils/whatsapp';
 
 interface ProductCardProps {
@@ -8,6 +8,7 @@ interface ProductCardProps {
   config: StoreConfig;
   onOpenDetail: (product: Product) => void;
   onAddToCart: (product: Product) => void;
+  onEditProduct?: (product: Product) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -15,6 +16,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   config,
   onOpenDetail,
   onAddToCart,
+  onEditProduct,
 }) => {
   const directWhatsAppUrl = buildSingleProductWhatsAppUrl(product, 1, config);
 
@@ -61,6 +63,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
 
+        {/* Quick Edit button for owner */}
+        {onEditProduct && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onEditProduct(product);
+            }}
+            className="absolute bottom-2.5 left-2.5 z-20 p-2 rounded-full bg-[#181818]/90 hover:bg-rose-900 text-zinc-300 hover:text-white border border-rose-900/40 transition-all opacity-80 group-hover:opacity-100 hover:scale-110 shadow-md"
+            title="تعديل السعر والصور"
+          >
+            <Edit3 className="w-3.5 h-3.5" />
+          </button>
+        )}
+
         {/* Hover Quick View Overlay */}
         <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 backdrop-blur-[2px]">
           <button
@@ -100,14 +116,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Pricing & WhatsApp Actions */}
         <div className="mt-3 pt-3 border-t border-rose-950/60">
-          <div className="flex items-baseline gap-2 mb-3">
-            <span className="text-lg sm:text-xl font-extrabold text-rose-300">
-              {product.price} <span className="text-xs font-medium text-rose-400">{config.currency}</span>
-            </span>
-            {product.originalPrice && product.originalPrice > product.price && (
-              <span className="text-xs text-zinc-500 line-through">
-                {product.originalPrice} {config.currency}
+          <div className="flex items-baseline justify-between gap-2 mb-3">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg sm:text-xl font-extrabold text-rose-300">
+                {product.price} <span className="text-xs font-medium text-rose-400">{config.currency}</span>
               </span>
+              {product.originalPrice && product.originalPrice > product.price && (
+                <span className="text-xs text-zinc-500 line-through">
+                  {product.originalPrice} {config.currency}
+                </span>
+              )}
+            </div>
+
+            {onEditProduct && (
+              <button
+                onClick={() => onEditProduct(product)}
+                className="text-[11px] text-rose-400 hover:text-rose-200 underline font-medium cursor-pointer"
+              >
+                تعديل السعر
+              </button>
             )}
           </div>
 
@@ -140,3 +167,4 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     </div>
   );
 };
+

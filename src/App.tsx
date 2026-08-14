@@ -47,6 +47,7 @@ export default function App() {
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'popular'>('default');
   
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
@@ -100,9 +101,38 @@ export default function App() {
     setCartItems([]);
   };
 
-  // Add Custom Product Handler (Owner)
-  const handleAddProduct = (newProduct: Product) => {
-    setProducts((prev) => [newProduct, ...prev]);
+  // Product Add / Edit / Delete Handlers (Owner)
+  const handleStartAddProduct = () => {
+    setEditingProduct(null);
+    setIsAddProductOpen(true);
+  };
+
+  const handleStartEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setIsAddProductOpen(true);
+  };
+
+  const handleSaveProduct = (savedProduct: Product) => {
+    setProducts((prev) => {
+      const exists = prev.some((p) => p.id === savedProduct.id);
+      if (exists) {
+        return prev.map((p) => (p.id === savedProduct.id ? savedProduct : p));
+      }
+      return [savedProduct, ...prev];
+    });
+
+    // Also update detail view if open
+    if (detailProduct && detailProduct.id === savedProduct.id) {
+      setDetailProduct(savedProduct);
+    }
+  };
+
+  const handleDeleteProduct = (productId: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== productId));
+    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
+    if (detailProduct && detailProduct.id === productId) {
+      setDetailProduct(null);
+    }
   };
 
   // Save Store Config
@@ -164,7 +194,7 @@ export default function App() {
         onSelectCategory={(cat) => setSelectedCategory(cat)}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
-        onOpenAddProduct={() => setIsAddProductOpen(true)}
+        onOpenAddProduct={handleStartAddProduct}
       />
 
       {/* Main Container */}
@@ -249,6 +279,7 @@ export default function App() {
                 config={config}
                 onOpenDetail={(prod) => setDetailProduct(prod)}
                 onAddToCart={(prod) => handleAddToCart(prod, 1)}
+                onEditProduct={handleStartEditProduct}
               />
             ))}
           </div>
@@ -274,6 +305,7 @@ export default function App() {
         config={config}
         onClose={() => setDetailProduct(null)}
         onAddToCart={handleAddToCart}
+        onEditProduct={handleStartEditProduct}
       />
 
       {/* Cart Drawer */}
@@ -295,11 +327,13 @@ export default function App() {
         onSaveConfig={handleSaveConfig}
       />
 
-      {/* Add Product Modal (Shop Owner) */}
+      {/* Add / Edit Product Modal (Shop Owner) */}
       <AddProductModal
         isOpen={isAddProductOpen}
         onClose={() => setIsAddProductOpen(false)}
-        onAddProduct={handleAddProduct}
+        onSaveProduct={handleSaveProduct}
+        onDeleteProduct={handleDeleteProduct}
+        initialProduct={editingProduct}
       />
 
       {/* Footer */}
