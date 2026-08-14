@@ -203,5 +203,19 @@ export const INITIAL_PRODUCTS: Product[] = [
     isNew: true,
     isBestSeller: true,
     material: 'قماش أوكسفورد بوليستر مقاوم للمياه والتمزق مع سحابات متينة'
-  }
+  },
+  {
+    id: 'cats-cats' ,
+    code: 'rosa-cats-01',
+    title : ' حقيبة كتف عالية الجودة بتصميم مناسب لجميع المناسبات ',
+    price : 2800,
+    originalPrice: 3200,
+    category 'backpacks' ,
+    image : cats1,
+    gallery :[cats1,cats2,cats3],
+    instock : true ,
+    isnew: true ,
+    material : 'مستورد و بمعايير جود عالية '},
+    
+  
 ];
