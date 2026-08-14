@@ -160,7 +160,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2000,
     originalPrice: 2800,
     category: 'backpacks',
-    image: nikeBackpackImg,
+    image: src/assets/images/images (35).jpeg,
     gallery: [
       nikeBackpackImg
     ],
