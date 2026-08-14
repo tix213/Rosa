@@ -48,14 +48,14 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'women-handbags',
     image: cats1,
     colors: [
-      { name: 'وردي ناعم (Soft Rose)', colorCode: '#F472B6', image: hermesPinkImg },
-      { name: 'بيج نيود (Nude Beige)', colorCode: '#D8B48D', image: hermesClassicImg },
-      { name: 'أسود ملكي (Royal Black)', colorCode: '#18181B', image: hermesBlackImg }
+      { name: 'وردي ناعم (Soft Rose)', colorCode: '#F472B6', image: cats1},
+      { name: 'بيج نيود (Nude Beige)', colorCode: '#D8B48D', image: cats2},
+      { name: 'أسود ملكي (Royal Black)', colorCode: '#18181B', image: cats3 }
     ],
     gallery: [
-      hermesPinkImg,
-      hermesClassicImg,
-      hermesBlackImg
+      cats1,
+      cats2,
+      cats3
     ],
     inStock: true,
     isNew: true,
